@@ -1,6 +1,7 @@
 package com.krisambali.kriscalculator;
 
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -145,8 +146,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edittext1.getText().length() != 0) {
-                    vv1 = edittext1.getText() + "";
-                    distext1.setText(distext1.getText() + "" + edittext1.getText());
+                    vv1 = distext1.getText() + "";
+                    if (vv1.length() > 0) {if (vv1.substring(vv1.length()-1,vv1.length()).equals("=")) {vv1="";}}
+                    distext1.setText( vv1  + edittext1.getText());
                     in1=distext1.getText() + "";
                     vv1 = myMethod(in1,brac);
                     distext2.setText(vv1 + "");
@@ -155,10 +157,16 @@ public class MainActivity extends AppCompatActivity {
                     edittext1.setText(null);
                     int1=1;
                 } else {
-                    vv1 = distext1.getText() + "";
-                    vv1 = vv1.substring(0,vv1.length()-1) + "+";
-                    distext1.setText(vv1);
-                    int1=1;
+                    if (int1>0) {
+                        vv1 = distext1.getText() + "";
+                        vv1 = vv1.substring(0, vv1.length() - 1) + "+";
+                        distext1.setText(vv1);
+                        int1 = 1;
+                    } else if (distext2.getText().length()>0) {
+                        vv1 = distext2.getText() + "+";
+                        distext1.setText(vv1);
+                        int1 = 1;
+                    }
                 }
             }
         });
@@ -166,32 +174,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edittext1.getText().length() != 0) {
-                    vv1 = edittext1.getText() + "";
-                    distext1.setText(distext1.getText() + "" + edittext1.getText());
-                    in1=distext1.getText() + "";
-                    vv1 = myMethod(in1,brac);
-                    distext2.setText(vv1 + "");
-                    distext1.setText(distext1.getText() + "" + "-");
-                    int1=2;
-                    deci = false;
-                    edittext1.setText(null);
-                }  else {
-                    if (int1 > 0) {
-                        vv1 = distext1.getText() + "";
-                        vv1 = vv1.substring(0,vv1.length()-1) + "-";
-                        distext1.setText(vv1);
-                        int1 = 2;
+                    vv1 = distext1.getText() + "";
+                    if (vv1.length() > 0) {
+                        if (vv1.substring(vv1.length() - 1, vv1.length()).equals("=")) {
+                            vv1 = "";
                         }
                     }
+                    distext1.setText(vv1 + edittext1.getText());
+                    in1 = distext1.getText() + "";
+                    vv1 = myMethod(in1, brac);
+                    distext2.setText(vv1 + "");
+                    distext1.setText(distext1.getText() + "" + "-");
+                    int1 = 2;
+                    deci = false;
+                    edittext1.setText(null);
+                } else {
+                    if (int1 > 0) {
+                        vv1 = distext1.getText() + "";
+                        vv1 = vv1.substring(0, vv1.length() - 1) + "-";
+                        distext1.setText(vv1);
+                        int1 = 2;
+                    } else if (distext2.getText().length() > 0) {
+                        vv1 = distext2.getText() + "-";
+                        distext1.setText(vv1);
+                        int1 = 2;
+                    }
                 }
+            }
         });
 
         button_Mul.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (edittext1.getText().length() != 0) {
-                    vv1 = edittext1.getText() + "";
-                    distext1.setText(distext1.getText() + "" + edittext1.getText() );
+                    vv1 = distext1.getText() + "";
+                    if (vv1.length() > 0) {if (vv1.substring(vv1.length()-1,vv1.length()).equals("=")) {vv1="";}}
+                    distext1.setText( vv1  + edittext1.getText());
                     in1=distext1.getText() + "";
                     vv1 = myMethod(in1,brac);
                     distext2.setText(vv1 + "");
@@ -205,6 +223,10 @@ public class MainActivity extends AppCompatActivity {
                         vv1 = vv1.substring(0,vv1.length()-1) + "*";
                         distext1.setText(vv1);
                         int1 = 3;
+                    }  else if (distext2.getText().length()>0) {
+                        vv1 = distext2.getText() + "*";
+                        distext1.setText(vv1);
+                        int1 = 3;
                     }
                     }
                 }
@@ -214,8 +236,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edittext1.getText().length() != 0) {
-                    vv1 = edittext1.getText() + "";
-                    distext1.setText(distext1.getText() + "" + edittext1.getText());
+                    vv1 = distext1.getText() + "";
+                    if (vv1.length() > 0) {if (vv1.substring(vv1.length()-1,vv1.length()).equals("=")) {vv1="";}}
+                    distext1.setText( vv1  + edittext1.getText());
                     in1=distext1.getText() + "";
                     vv1 = myMethod(in1,brac);
                     distext2.setText(vv1 + "");
@@ -229,6 +252,10 @@ public class MainActivity extends AppCompatActivity {
                         vv1 = vv1.substring(0,vv1.length()-1) + "/";
                         distext1.setText(vv1);
                         int1 = 4;
+                    }  else if (distext2.getText().length()>0) {
+                        vv1 = distext2.getText() + "/";
+                        distext1.setText(vv1);
+                        int1 = 4;
                     }
                 }
             }
@@ -238,8 +265,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edittext1.getText().length() != 0) {
-                    vv1 = edittext1.getText() + "";
-                    distext1.setText(distext1.getText() + "" + edittext1.getText() );
+                    vv1 = distext1.getText() + "";
+                    if (vv1.length() > 0) {if (vv1.substring(vv1.length()-1,vv1.length()).equals("=")) {vv1="";}}
+                    distext1.setText( vv1  + edittext1.getText());
                     in1=distext1.getText() + "";
                     vv1 = myMethod(in1,brac);
                     distext2.setText(String.format("%s", vv1));
@@ -253,6 +281,10 @@ public class MainActivity extends AppCompatActivity {
                     vv1 = vv1.substring(0,vv1.length()-1) + "%";
                     distext1.setText(vv1);
                     int1 = 5;
+                }  else if (distext2.getText().length()>0) {
+                    vv1 = distext2.getText() + "%";
+                    distext1.setText(vv1);
+                    int1 = 5;
                 }
             }
             }
@@ -262,8 +294,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edittext1.getText().length() != 0) {
-                    vv1 = edittext1.getText() + "";
-                    distext1.setText(distext1.getText() + "" + edittext1.getText() );
+                    vv1 = distext1.getText() + "";
+                    if (vv1.length() > 0) {if (vv1.substring(vv1.length()-1,vv1.length()).equals("=")) {vv1="";}}
+                    distext1.setText( vv1  + edittext1.getText());
                     in1=distext1.getText() + "";
                     vv1 = myMethod(in1,brac);
                     distext2.setText(vv1 + "");
@@ -277,6 +310,10 @@ public class MainActivity extends AppCompatActivity {
                     vv1 = vv1.substring(0,vv1.length()-1) + "^";
                     distext1.setText(vv1);
                     int1 = 6;
+                }  else if (distext2.getText().length()>0) {
+                    vv1 = distext2.getText() + "^";
+                    distext1.setText(vv1);
+                    int1 = 6;
                 }
             }
             }
@@ -286,8 +323,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (edittext1.getText().length() != 0) {
-                    vv1 = edittext1.getText() + "";
-                    distext1.setText(distext1.getText() + "" + edittext1.getText() );
+                    vv1 = distext1.getText() + "";
+                    if (vv1.length() > 0) {if (vv1.substring(vv1.length()-1,vv1.length()).equals("=")) {vv1="";}}
+                    distext1.setText( vv1  + edittext1.getText());
+                    in1=distext1.getText() + "";
                     vv1 = myMethod(in1,brac);
                     distext2.setText(vv1 + "");
                     distext1.setText(distext1.getText() + "" + "√");
@@ -298,6 +337,10 @@ public class MainActivity extends AppCompatActivity {
                 if (int1 > 0) {
                     vv1 = distext1.getText() + "";
                     vv1 = vv1.substring(0,vv1.length()-1) + "√";
+                    distext1.setText(vv1);
+                    int1 = 7;
+                }  else if (distext2.getText().length()>0) {
+                    vv1 = distext2.getText() + "√";
                     distext1.setText(vv1);
                     int1 = 7;
                 }
@@ -374,12 +417,12 @@ public class MainActivity extends AppCompatActivity {
                 } else if (m.substring(i, i + 1).equals("√")) {
                     nstring=nstring.replace(mstring + "√" + n1[i + 1],"Math.pow(" + mstring + ",1.0/" + n1[i + 1] + ")");
                     mstring = "Math.pow(" + mstring + ",1.0/" + n1[i + 1] + ")";
-                } else {
-                    mstring=n1[i + 1];
-                }
+                } else   mstring=n1[i + 1];
+
             }
             x = nstring;
         }
+
         //You have to download rhino1_7R2.jar file from mozhilla and place at android studio lib folder
             Context context = Context.enter(); //
             context.setOptimizationLevel(-1); // this is required[2]
@@ -392,6 +435,8 @@ public class MainActivity extends AppCompatActivity {
             BigDecimal bb = new BigDecimal(x);
             //To remove unnecessary zeros after decimal
             x = bb.stripTrailingZeros().toPlainString();
+
+
             return x;
     }
 }
